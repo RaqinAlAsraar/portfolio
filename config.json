@@ -1,0 +1,176 @@
+{
+    "heroTypingWords": [
+        "Cybersecurity Researcher", 
+        "Bug Hunter", 
+        "Web Pentester"
+    ],
+    "about": {
+        "paragraphs": [
+            "I am <span class=\"text-lime font-bold drop-shadow-[0_0_8px_rgba(198,255,51,0.8)]\">Ali Abbas Haidar</span>, also known as <span class=\"text-violet font-bold drop-shadow-[0_0_8px_rgba(125,57,235,0.8)]\">Raqin Al-Asraar</span>. I am dedicated to protecting privacy and ensuring human security. My true passion lies in the art of ethical hacking.",
+            "My approach to security is highly methodical and strategic. I dig deep into the architecture, understanding how data flows, identifying flaws and vulnerabilities. I code to understand systems, and I break them to secure them. I wish to become a better version of myself every day.",
+            "Beyond the terminal, I try to practice soft skills like patience, critical thinking, discipline, and strategy making to serve my passion with full dedication."
+        ],
+        "terminalCmds": [
+            { "cmd": "whoami", "output": "Raqin Al-Asraar [›_ ]" },
+            { "cmd": "cat /etc/skills", "output": "Security Research, Bug Hunting, Coding" },
+            { "cmd": "netstat -an | grep ESTABLISHED", "output": "Active Connection: Constantly growing knowledge and skills" },
+            { "cmd": "./execute_payload.sh", "output": "[*] Deploying payloads... \n[+] Access Granted. Ready to hunt." }
+        ]
+    },
+    "experience": [
+        {
+            "title": "Security Researcher & Bug Hunter",
+            "organization": "Independent",
+            "date": "2025 - Present",
+            "description": "Actively researching web application vulnerabilities. Focusing on identifying and reporting high-impact bugs in public programs."
+        },
+        {
+            "title": "HackwithIndiaa",
+            "organization": "Hackathon",
+            "date": "2026",
+            "description": "Competed against many security enthusiasts. Secured Rank 43 and won APIsec ACP voucher, demonstrated practical exploitation skills and rapid problem-solving under time constraints.",
+            "documentLink": "assets/student.png",
+            "documentName": "View Certificate"
+        }
+    ],
+    "certifications": [
+        {
+            "name": "Python For Cybersecurity",
+            "issuer": "Infosec",
+            "date": "2026",
+            "status": "Going On",
+            "statusColor": "violet", 
+            "icon": "https://cdn.simpleicons.org/python",
+            "documentLink": "#certifications"
+        },
+        {
+            "name": "C Programming with Linux",
+            "issuer": "Institut Mines-Télécom and Dartmouth College",
+            "date": "2026",
+            "status": "Going On",
+            "statusColor": "violet", 
+            "icon": "https://cdn.simpleicons.org/c++",
+            "documentLink": "#certifications"
+        },
+        {
+            "name": "Kali Linux",
+            "issuer": "Udemy",
+            "date": "2026",
+            "status": "Going On",
+            "statusColor": "violet", 
+            "icon": "https://www.kali.org/images/favicon-dark.png",
+            "documentLink": "#certifications"
+        },
+        {
+            "name": "SQL Programming",
+            "issuer": "LinkedIn",
+            "date": "2026",
+            "status": "Certified",
+            "statusColor": "lime", 
+            "icon": "https://cdn.simpleicons.org/mysql",
+            "documentLink": "assets/sql.pdf"
+        },
+         {
+            "name": "Bash",
+            "issuer": "Udemy",
+            "date": "2026",
+            "status": "Certified",
+            "statusColor": "lime", 
+            "icon": "https://cdn.simpleicons.org/gnubash",
+            "documentLink": "assets/bash.jpg"
+        },
+        {
+            "name": "APIsec Certified Practitioner",
+            "issuer": "APIsec",
+            "date": "2026",
+            "status": "Soon",
+            "statusColor": "outerspace",
+            "icon": "https://images.credly.com/size/200x200/images/722366ec-1535-4d51-ac31-f5294833e3d4/blob.png",
+            "documentLink": "#certifications"
+        },
+        {
+            "name": "BSCP",
+            "issuer": "PortSwigger",
+            "date": "2026",
+            "status": "Soon",
+            "statusColor": "outerspace",
+            "icon": "https://www.kali.org/tools/burpsuite/images/burpsuite-logo.svg",
+            "documentLink": "#certifications"
+        }
+    ],
+    "projects": [
+        {
+            "title": "Coming Soon...",
+            "type": "Security Tooling",
+            "description": "",
+            "tech": ["Python", "Bash", "API Integration"],
+            "github": "",
+            "markdownFile": "projects/link.md"
+        }
+    ],
+    "skills": [
+        {
+            "category": "Target Environments & Domains",
+            "items": [
+                { "name": "Web Pentesting", "icon": "https://img.icons8.com/?size=100&id=63807&format=png&color=000000" },
+                { "name": "API Security", "icon": "https://img.icons8.com/?size=100&id=36iGMeQeI3hC&format=png&color=000000" },
+                { "name": "Bug Bounty", "icon": "https://cdn.simpleicons.org/openbugbounty" },
+                { "name": "OSINT", "icon": "https://img.icons8.com/?size=100&id=WwWusvLMTFd7&format=png&color=000000" },
+                { "name": "Automation", "icon": "https://img.icons8.com/?size=100&id=64br7u9FDpMC&format=png&color=000000" }
+            ]
+        },
+        {
+            "category": "Offensive Security",
+            "items": [
+                { "name": "Kali Linux", "icon": "https://www.kali.org/images/favicon-dark.png" },
+                { "name": "OWASP", "icon": "https://cdn.simpleicons.org/owasp" },
+                { "name": "MITRE ATT&CK", "icon": "https://attack.mitre.org/theme/images/ATT&CK_red.png" },
+                { "name": "Burp Suite", "icon": "https://www.kali.org/tools/burpsuite/images/burpsuite-logo.svg" },
+                { "name": "Metasploit", "icon": "https://www.kali.org/tools/metasploit-framework/images/metasploit-framework-logo.svg" },
+                { "name": "Nmap", "icon": "https://www.kali.org/tools/nmap/images/nmap-logo.svg" },
+                { "name": "WPScan", "icon": "https://www.kali.org/tools/wpscan/images/wpscan-logo.svg" },
+                { "name": "SQLmap", "icon": "https://www.kali.org/tools/sqlmap/images/sqlmap-logo.svg" },
+                { "name": "Wireshark", "icon": "https://www.kali.org/tools/wireshark/images/wireshark-logo.svg" },
+                { "name": "Hydra", "icon": "https://www.kali.org/tools/hydra/images/hydra-logo.svg" },
+                { "name": "Caido", "icon": "https://www.kali.org/tools/caido/images/caido-logo.svg" },
+                { "name": "Zaproxy", "icon": "https://www.kali.org/tools/zaproxy/images/zaproxy-logo.svg" },
+                { "name": "Wappalyzer", "icon": "https://cdn.simpleicons.org/wappalyzer" },
+                { "name": "SEToolkit", "icon": "https://www.kali.org/tools/set/images/set-logo.svg" },
+                { "name": "Spiderfoot","icon": "https://www.kali.org/tools/spiderfoot/images/spiderfoot-logo.svg" },
+                { "name": "Wifite", "icon": "https://www.kali.org/tools/wifite/images/wifite-logo.svg" },
+                { "name": "FFuf", "icon": "https://www.kali.org/tools/ffuf/images/ffuf-logo.svg" },
+                { "name": "Netcat", "icon": "https://www.kali.org/tools/netcat/images/netcat-logo.svg" },
+                { "name": "Custom Tools", "icon": "https://img.icons8.com/?size=100&id=s5NUIabJrb4C&format=png&color=000000" },
+                { "name": "Many More", "icon": "https://img.icons8.com/?size=100&id=12579&format=png&color=000000" }
+            ]
+        },
+        {
+            "category": "Coding & Scripting",
+            "items": [
+                { "name": "Python", "icon": "https://cdn.simpleicons.org/python" },
+                { "name": "C/C++", "icon": "https://cdn.simpleicons.org/c++" },
+                { "name": "Bash", "icon": "https://cdn.simpleicons.org/gnubash" },
+                { "name": "HTML", "icon": "https://cdn.simpleicons.org/html5" },
+                { "name": "JavaScript", "icon": "https://cdn.simpleicons.org/javascript" },
+                { "name": "SQL", "icon": "https://cdn.simpleicons.org/mysql" },
+                { "name": "PHP", "icon": "https://cdn.simpleicons.org/php" },
+                { "name": "Java", "icon": "https://img.icons8.com/?size=100&id=13679&format=png&color=000000" },
+                { "name": "Kotin", "icon": "https://cdn.simpleicons.org/kotlin" }
+            ]
+        }
+    ],
+    "writeups": [
+        {
+            "title": "Coming soon...",
+            "date": "2026",
+            "platform": "My Blog",
+            "summary": "...",
+            "markdownFile": "writeups/test.md"
+        }
+    ],
+    "contactLinks": [
+        { "name": "Email", "icon": "https://cdn.simpleicons.org/gmail", "href": "mailto:aliabbashaidar313@gmail.com", "bg": "bg-charcoal hover:bg-white text-white hover:text-obsidian" },
+        { "name": "GitHub", "icon": "https://cdn.simpleicons.org/github", "href": "https://github.com/raqinalasraar", "bg": "bg-charcoal hover:bg-[#2dba4e] text-white" },
+        { "name": "LinkedIn", "icon": "https://img.icons8.com/?size=100&id=8808&format=png&color=000000", "href": "https://www.linkedin.com/in/ali-abbas-haidar-18b76539b", "bg": "bg-charcoal hover:bg-[#0077b5] text-white" }
+    ]
+}

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ali Abbas Haidar | Raqin Al-Asraar [›_ ]</title>
+    
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23C6FF33' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z'/></svg>">
+    <meta name="description" content="Portfolio of Ali Abbas Haidar (Raqin Al-Asraar) - Cybersecurity Researcher & Coder.">
+    <meta name="theme-color" content="#151315">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    
+    <!-- Marked.js -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;600&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#151315', charcoal: '#36373D', bluegray: '#7E8894',
+                        lightgray: '#B2B8C2', outerspace: '#555D67', lime: '#C6FF33', violet: '#7D39EB',
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'], mono: ['Fira Code', 'monospace'] },
+                    animation: { 
+                        'blink': 'blink 1s step-end infinite',
+                        'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite'
+                    },
+                    keyframes: { blink: { '0%, 100%': { opacity: 1 }, '50%': { opacity: 0 } } }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #151315; color: #B2B8C2; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #151315; }
+        ::-webkit-scrollbar-thumb { background: #36373D; border-radius: 4px; }
+        
+        .bg-grid {
+            background-size: 30px 30px;
+            background-image: linear-gradient(to right, rgba(126, 136, 148, 0.04) 1px, transparent 1px),
+                              linear-gradient(to bottom, rgba(126, 136, 148, 0.04) 1px, transparent 1px);
+        }
+        
+        .glass-card {
+            background: rgba(54, 55, 61, 0.6);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(126, 136, 148, 0.1);
+        }
+
+        /* Loading Screen UI */
+        #loader {
+            position: fixed; inset: 0; z-index: 9999;
+            background: #151315; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; transition: opacity 0.4s ease;
+        }
+        .shield-path {
+            stroke-dasharray: 1000; stroke-dashoffset: 1000;
+            animation: drawShield 2s ease forwards, glowShield 2s ease infinite alternate 2s;
+        }
+        @keyframes drawShield { to { stroke-dashoffset: 0; } }
+        @keyframes glowShield { to { filter: drop-shadow(0 0 15px #C6FF33); } }
+
+        /* Network Plexus Background */
+        #cyber-canvas {
+            position: fixed; inset: 0; z-index: -1; pointer-events: none;
+        }
+
+        .term-cursor { display: inline-block; width: 8px; height: 16px; background-color: #C6FF33; animation: blink 1s step-end infinite; vertical-align: middle; }
+
+        /* Isolated Views */
+        .isolated-view { display: none; }
+        .isolated-view.active { display: block; animation: quickFadeIn 0.2s ease forwards; }
+        
+        @keyframes quickFadeIn {
+            from { opacity: 0; } to { opacity: 1; }
+        }
+        
+        /* Floating Scroll to Top */
+        #scrollTopBtn { transition: opacity 0.3s, transform 0.3s; }
+        #scrollTopBtn.hidden-fab { opacity: 0; pointer-events: none; transform: translateY(20px); }
+    </style>
+</head>
+<body class="bg-obsidian text-lightgray font-sans antialiased min-h-[100dvh] flex flex-col relative z-0">
+    
+    <!-- LOADING SCREEN -->
+    <div id="loader">
+        <svg width="120" height="150" viewBox="0 0 100 120" fill="none" stroke="#C6FF33" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <path class="shield-path" d="M50 5L10 25V55C10 80 25 100 50 115C75 100 90 80 90 55V25L50 5Z" />
+            <path class="shield-path" style="animation-delay: 0.5s;" d="M50 30L30 40V60C30 75 40 85 50 95C60 85 70 75 70 60V40L50 30Z" stroke="#7D39EB"/>
+        </svg>
+        <div class="mt-8 font-mono text-lime text-sm tracking-widest uppercase animate-pulse-fast">Initializing Environment</div>
+    </div>
+
+    <!-- Cyber Network Plexus Background -->
+    <canvas id="cyber-canvas"></canvas>
+    <div class="fixed inset-0 bg-grid z-[-1] pointer-events-none"></div>
+
+    <!-- BROWSER TOP NAV -->
+    <nav class="fixed top-0 w-full z-40 glass-card border-b border-charcoal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="#main" class="flex items-center gap-2 cursor-pointer">
+                    <i data-lucide="shield" class="text-lime w-6 h-6 drop-shadow-[0_0_5px_rgba(198,255,51,0.8)]"></i>
+                    <span class="text-white font-bold text-xl tracking-tight drop-shadow-md">Raqin<span class="text-violet">.</span>Al-Asraar [›_ ]</span>
+                </a>
+                <div class="hidden md:flex items-baseline space-x-6" id="desktop-nav">
+                    <a href="#main" class="nav-link text-sm font-mono text-lime hover:text-white transition-colors">Main</a>
+                    <a href="#about" class="nav-link text-sm font-mono text-bluegray hover:text-white transition-colors">About</a>
+                    <a href="#experience" class="nav-link text-sm font-mono text-bluegray hover:text-white transition-colors">Experience</a>
+                    <a href="#certifications" class="nav-link text-sm font-mono text-bluegray hover:text-white transition-colors">Certs</a>
+                    <a href="#skills" class="nav-link text-sm font-mono text-bluegray hover:text-white transition-colors">Skills</a>
+                    <a href="#contact" class="nav-link text-sm font-mono text-bluegray hover:text-white transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MOBILE BOTTOM NAV -->
+    <nav id="mobile-bottom-nav" class="md:hidden fixed bottom-4 left-4 right-4 z-40 glass-card rounded-2xl border border-outerspace shadow-[0_0_20px_rgba(0,0,0,0.8)] transition-transform duration-300">
+        <div class="flex justify-around items-center p-3 relative">
+            <a href="#main" class="mobile-nav-btn flex flex-col items-center gap-1 text-lime" data-target="main">
+                <i data-lucide="home" class="w-5 h-5"></i><span class="text-[10px] font-mono">Main</span>
+            </a>
+            <a href="#about" class="mobile-nav-btn flex flex-col items-center gap-1 text-bluegray" data-target="about">
+                <i data-lucide="user" class="w-5 h-5"></i><span class="text-[10px] font-mono">About</span>
+            </a>
+            <a href="#experience" class="mobile-nav-btn flex flex-col items-center gap-1 text-bluegray" data-target="experience">
+                <i data-lucide="briefcase" class="w-5 h-5"></i><span class="text-[10px] font-mono">Exp</span>
+            </a>
+            <a href="#skills" class="mobile-nav-btn flex flex-col items-center gap-1 text-bluegray" data-target="skills">
+                <i data-lucide="layers" class="w-5 h-5"></i><span class="text-[10px] font-mono">Skills</span>
+            </a>
+            <a href="#contact" class="mobile-nav-btn flex flex-col items-center gap-1 text-bluegray" data-target="contact">
+                <i data-lucide="mail" class="w-5 h-5"></i><span class="text-[10px] font-mono">Contact</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- SCROLL TO TOP FAB (Mobile) -->
+    <button id="scrollTopBtn" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="hidden-fab md:hidden fixed right-4 bottom-24 z-50 bg-charcoal text-lime p-3 rounded-full border border-lime/50 shadow-[0_0_15px_rgba(198,255,51,0.3)] hover:bg-obsidian hover:shadow-[0_0_20px_rgba(198,255,51,0.6)]">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- ISOLATED VIEW: Writeups / Tools -->
+    <div id="isolated-container" class="isolated-view pt-24 pb-12 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full min-h-screen">
+        <a href="#main" class="inline-flex mb-8 text-lime items-center gap-2 hover:text-white transition-colors font-mono border border-lime/30 bg-lime/10 px-4 py-2 rounded-lg backdrop-blur-md">
+            <i data-lucide="arrow-left" class="w-4 h-4"></i> Return to Main Server
+        </a>
+        <div id="isolated-content"></div>
+    </div>
+
+    <!-- ISOLATED VIEW: Markdown Reader -->
+    <div id="markdown-reader" class="isolated-view fixed inset-0 z-[100] bg-obsidian/95 backdrop-blur-xl overflow-y-auto w-full h-[100dvh]">
+        <div class="max-w-4xl mx-auto px-4 py-8 md:py-16 pb-32">
+            <button onclick="window.history.back()" class="mb-8 text-lime flex items-center gap-2 hover:text-white transition-colors font-mono">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i> Close Report
+            </button>
+            <div class="bg-charcoal/30 border border-outerspace rounded-xl p-6 md:p-10 shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+                <article id="markdown-content" class="prose prose-hacker prose-invert max-w-none font-sans"></article>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTINUOUS SCROLL VIEW -->
+    <main id="main-scroll-view" class="flex-grow pt-24 pb-24 md:pb-12 px-5 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full space-y-32">
+        
+        <!-- MAIN -->
+        <section id="main" class="scroll-mt-32 min-h-[70vh] flex flex-col justify-center items-start">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-card border border-lime/30 mb-6 shadow-[0_0_10px_rgba(198,255,51,0.2)]">
+                <span class="w-2 h-2 rounded-full bg-lime animate-pulse drop-shadow-[0_0_5px_#C6FF33]"></span>
+                <span class="text-[10px] sm:text-xs font-mono text-lime tracking-wider uppercase">System Online</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-4 tracking-tight leading-tight drop-shadow-lg">
+                Ali Abbas Haidar
+            </h1>
+            <h2 class="text-xl sm:text-2xl md:text-4xl text-bluegray font-light mb-6 h-10">
+                <span class="text-violet">&gt;</span> <span id="typewriter-text" class="text-lime font-mono drop-shadow-[0_0_3px_#C6FF33]"></span><span class="animate-blink text-lime">_</span>
+            </h2>
+            <p class="max-w-2xl text-base sm:text-lg mb-8 leading-relaxed text-lightgray">
+            There is a hidden narrative within every system. I look beyond the surface to uncover logic flaws—driven by a methodical pursuit of truth and the quiet defense of digital integrity. I hunt vulnerabilities to secure the cyberspace and protect its users.
+            </p>
+            <div class="flex flex-wrap gap-4 mt-2">
+                <a href="#writeups" class="bg-lime text-obsidian px-6 py-3 rounded font-bold hover:bg-white transition-all duration-300 flex items-center gap-2 text-sm sm:text-base shadow-[0_0_20px_rgba(198,255,51,0.4)]">
+                    <i data-lucide="file-text" class="w-5 h-5"></i> Read Writeups
+                </a>
+                <a href="#tools" class="glass-card hover:border-violet text-white px-6 py-3 rounded font-medium hover:bg-violet/10 transition-colors duration-300 flex items-center gap-2 text-sm sm:text-base">
+                    <i data-lucide="terminal-square" class="w-5 h-5 text-violet"></i> View Tools
+                </a>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="scroll-mt-32">
+            <div class="flex items-center gap-3 mb-8">
+                <i data-lucide="user" class="text-violet w-8 h-8 drop-shadow-[0_0_5px_#7D39EB]"></i>
+                <h2 class="text-3xl font-bold text-white tracking-tight">Whoami</h2>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10">
+                <div class="lg:col-span-3 space-y-6 text-base sm:text-lg" id="about-text-container"></div>
+                <div class="lg:col-span-2 rounded-xl overflow-hidden border border-outerspace bg-[#080808] shadow-[0_0_30px_rgba(0,0,0,0.8)] h-fit">
+                    <div class="bg-charcoal px-4 py-3 flex items-center gap-2 border-b border-outerspace">
+                        <div class="flex gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div><div class="w-3 h-3 rounded-full bg-yellow-500"></div><div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span class="text-[10px] sm:text-xs font-mono text-bluegray ml-4 opacity-70">raqinalasraar@kali:~</span>
+                    </div>
+                    <div class="p-5 font-mono text-sm space-y-3 min-h-[250px]" id="about-terminal-container"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE -->
+        <section id="experience" class="scroll-mt-32">
+            <div class="flex items-center gap-3 mb-10">
+                <i data-lucide="briefcase" class="text-lime w-8 h-8 drop-shadow-[0_0_5px_#C6FF33]"></i>
+                <h2 class="text-3xl font-bold text-white tracking-tight">Experience</h2>
+            </div>
+            <div class="relative border-l-2 border-charcoal ml-3 sm:ml-4 space-y-10" id="experience-container"></div>
+        </section>
+
+        <!-- CERTIFICATIONS -->
+        <section id="certifications" class="scroll-mt-32">
+            <div class="flex items-center gap-3 mb-10">
+                <i data-lucide="award" class="text-violet w-8 h-8 drop-shadow-[0_0_5px_#7D39EB]"></i>
+                <h2 class="text-3xl font-bold text-white tracking-tight">Certifications</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="certs-container"></div>
+        </section>
+
+        <!-- SKILLS -->
+        <section id="skills" class="scroll-mt-32">
+            <div class="flex items-center gap-3 mb-10">
+                <i data-lucide="layers" class="text-lime w-8 h-8 drop-shadow-[0_0_5px_#C6FF33]"></i>
+                <h2 class="text-3xl font-bold text-white tracking-tight">Technical Arsenal</h2>
+            </div>
+            <div class="space-y-10" id="skills-container"></div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="scroll-mt-32 pb-10">
+            <div class="flex items-center gap-3 mb-10">
+                <i data-lucide="mail" class="text-violet w-8 h-8 drop-shadow-[0_0_5px_#7D39EB]"></i>
+                <h2 class="text-3xl font-bold text-white tracking-tight">Initiate Connection</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="contact-links-container"></div>
+        </section>
+
+    </main>
+
+    <script>
+        let configData = null;
+
+        // CYBER NETWORK PLEXUS BACKGROUND (Nodes and Connections)
+        function initNetworkBackground() {
+            const canvas = document.getElementById('cyber-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            function resize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            window.addEventListener('resize', resize);
+            resize();
+            
+            let nodes = [];
+            // Dynamically adjust node count based on screen size so mobile isn't cluttered
+            const numNodes = window.innerWidth < 768 ? 35 : 70; 
+            const connectionDistance = 140;
+
+            for(let i=0; i<numNodes; i++) {
+                nodes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    vx: (Math.random() - 0.5) * 0.8, // Slow, deliberate drift
+                    vy: (Math.random() - 0.5) * 0.8,
+                    // Mostly subtle violet, occasional bright lime nodes
+                    color: Math.random() > 0.15 ? '#7D39EB' : '#C6FF33', 
+                    radius: Math.random() * 1.5 + 0.5
+                });
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // Update nodes
+                nodes.forEach(node => {
+                    node.x += node.vx;
+                    node.y += node.vy;
+
+                    // Bounce off walls smoothly
+                    if(node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                    if(node.y < 0 || node.y > canvas.height) node.vy *= -1;
+                });
+
+                // Draw connections (The Plexus effect)
+                for(let i=0; i<numNodes; i++) {
+                    for(let j=i+1; j<numNodes; j++) {
+                        let dx = nodes[i].x - nodes[j].x;
+                        let dy = nodes[i].y - nodes[j].y;
+                        let distance = Math.sqrt(dx*dx + dy*dy);
+
+                        if(distance < connectionDistance) {
+                            ctx.beginPath();
+                            ctx.moveTo(nodes[i].x, nodes[i].y);
+                            ctx.lineTo(nodes[j].x, nodes[j].y);
+                            // Opacity increases as nodes get closer
+                            let alpha = 1 - (distance / connectionDistance);
+                            // Connection lines are a subtle violet
+                            ctx.strokeStyle = `rgba(125, 57, 235, ${alpha * 0.4})`;
+                            ctx.lineWidth = 1;
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                // Draw nodes on top of lines
+                nodes.forEach(node => {
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = node.color;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = node.color;
+                    ctx.fill();
+                    ctx.shadowBlur = 0; // Reset shadow so lines aren't blurred
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // INITIALIZATION
+        document.addEventListener('DOMContentLoaded', async () => {
+            initNetworkBackground();
+            
+            try {
+                const response = await fetch('config.json');
+                if(!response.ok) throw new Error();
+                configData = await response.json();
+            } catch (e) {
+                console.error("Using fallback config.");
+                configData = getFallbackConfig();
+            }
+
+            buildUI();
+            lucide.createIcons();
+            typeWriter();
+            setupScrollObservers();
+
+            // Clear loader and route hash
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    handleHash(); 
+                }, 400);
+            }, 1000); // Ensures shield is seen momentarily
+            
+            window.addEventListener('hashchange', handleHash);
+        });
+
+        // ==========================================
+        // URL ROUTING & NAVIGATION
+        // ==========================================
+        function handleHash() {
+            const hash = window.location.hash;
+            
+            // 1. Report Route
+            if(hash.startsWith('#report=')) {
+                openIsolatedView('none'); // Hides main UI instantly
+                const file = hash.split('=')[1];
+                loadMarkdown(file);
+                return;
+            } else {
+                closeReader();
+            }
+
+            // 2. Tab Routes
+            if(hash === '#writeups') {
+                openIsolatedView('writeups');
+            } else if (hash === '#tools') {
+                openIsolatedView('projects');
+            } else {
+                // 3. Main Scroll Anchors
+                closeIsolatedViews();
+                if(hash && document.querySelector(hash)) {
+                    document.querySelector(hash).scrollIntoView({ behavior: 'smooth' });
+                } else if (!hash) {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            }
+        }
+
+        // ==========================================
+        // UI BUILDERS
+        // ==========================================
+        function buildUI() {
+            document.getElementById('about-text-container').innerHTML = configData.about.paragraphs.map(p => `<p class="leading-relaxed text-lightgray">${p}</p>`).join('');
+            
+            document.getElementById('experience-container').innerHTML = configData.experience.map(exp => {
+                let docBtn = exp.documentLink && exp.documentLink !== '#' ? `<a href="${exp.documentLink}" target="_blank" class="mt-4 inline-flex items-center gap-2 text-xs font-mono text-lime border border-lime/30 bg-lime/10 hover:bg-lime hover:text-obsidian px-3 py-2 rounded transition-all shadow-[0_0_10px_rgba(198,255,51,0.2)]"><i data-lucide="external-link" class="w-4 h-4"></i> ${exp.documentName || 'View Document'}</a>` : '';
+                return `
+                <div class="relative pl-6 sm:pl-10 group">
+                    <div class="absolute left-[-9px] top-1.5 w-4 h-4 rounded-full bg-violet border-4 border-obsidian group-hover:bg-lime group-hover:shadow-[0_0_10px_#C6FF33] transition-all duration-500"></div>
+                    <div class="glass-card p-6 rounded-xl border border-charcoal group-hover:border-lime/50 transition-colors duration-300">
+                        <span class="text-lime font-mono text-xs mb-2 block drop-shadow-[0_0_2px_#C6FF33]">${exp.date}</span>
+                        <h3 class="text-xl font-bold text-white">${exp.title}</h3>
+                        <h4 class="text-bluegray mb-4 text-sm font-mono">${exp.organization}</h4>
+                        <p class="text-lightgray leading-relaxed text-sm sm:text-base">${exp.description}</p>
+                        ${docBtn}
+                    </div>
+                </div>`;
+            }).join('');
+
+            // Certifications now perfectly open their URLs
+            document.getElementById('certs-container').innerHTML = configData.certifications.map(cert => `
+                <a href="${cert.documentLink}" target="_blank" class="block glass-card p-6 rounded-xl border border-charcoal hover:border-lime hover:-translate-y-1 hover:shadow-[0_0_15px_rgba(198,255,51,0.2)] transition-all duration-300 flex flex-col group">
+                    <div class="flex justify-between items-start mb-4">
+                        <img src="${cert.icon}" class="w-10 h-10 object-contain drop-shadow-md" alt="${cert.name}" onerror="this.src='https://cdn.simpleicons.org/linux'"/>
+                        <span class="text-[10px] font-mono px-2 py-1 rounded bg-${cert.statusColor}/10 text-${cert.statusColor} border border-${cert.statusColor}/30 uppercase tracking-wider">${cert.status}</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-1 leading-snug group-hover:text-lime transition-colors">${cert.name}</h3>
+                    <p class="text-bluegray text-sm mb-4">${cert.issuer}</p>
+                    <div class="mt-auto pt-4 border-t border-outerspace/50 flex justify-between items-center">
+                        <span class="text-xs text-outerspace font-mono">${cert.date}</span>
+                        <span class="text-xs text-lime font-mono opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">Open <i data-lucide="external-link" class="w-3 h-3"></i></span>
+                    </div>
+                </a>
+            `).join('');
+
+            document.getElementById('skills-container').innerHTML = configData.skills.map(s => `
+                <div>
+                    <h3 class="text-lg font-mono text-white mb-4 flex items-center gap-2"><span class="text-violet">&gt;</span> ${s.category}</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        ${s.items.map(item => `
+                            <div class="glass-card border border-charcoal flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-bold text-white transition-all hover:border-lime hover:shadow-[0_0_15px_rgba(198,255,51,0.2)]">
+                                <img src="${item.icon}" class="w-6 h-6 object-contain drop-shadow-md" alt="${item.name}" /> ${item.name}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('contact-links-container').innerHTML = configData.contactLinks.map(link => `
+                <a href="${link.href}" target="_blank" class="${link.bg} flex items-center justify-center gap-3 p-4 rounded-xl border border-charcoal transition-all font-bold text-lg shadow-lg hover:shadow-xl hover:-translate-y-1">
+                    <img src="${link.icon}" class="w-6 h-6 object-contain" style="filter: brightness(0) invert(1);" alt="${link.name}" /> ${link.name}
+                </a>
+            `).join('');
+        }
+
+        // ==========================================
+        // ISOLATED VIEWS (TOOLS & WRITEUPS)
+        // ==========================================
+        function openIsolatedView(type) {
+            document.getElementById('main-scroll-view').style.display = 'none';
+            const iso = document.getElementById('isolated-container');
+            if(type !== 'none') iso.classList.add('active'); // Active class adds fade ONLY if needed
+            window.scrollTo({ top: 0 });
+
+            const content = document.getElementById('isolated-content');
+            if(type === 'projects') {
+                content.innerHTML = `
+                    <div class="flex items-center gap-3 mb-10"><i data-lucide="cpu" class="text-lime w-8 h-8 drop-shadow-[0_0_5px_#C6FF33]"></i><h2 class="text-3xl font-bold text-white">Security Tools</h2></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        ${configData.projects.map(p => `
+                            <div class="glass-card p-6 rounded-xl border border-charcoal hover:border-violet transition-colors shadow-lg">
+                                <span class="text-violet text-xs font-bold uppercase tracking-wider mb-2 block">${p.type}</span>
+                                <h3 class="text-2xl font-bold text-white mb-3">${p.title}</h3>
+                                <p class="text-bluegray mb-6 text-sm leading-relaxed">${p.description}</p>
+                                <div class="flex flex-wrap gap-2 mb-6">${p.tech.map(t => `<span class="text-[10px] font-mono px-2 py-1 bg-obsidian border border-outerspace rounded text-lightgray">${t}</span>`).join('')}</div>
+                                <div class="flex gap-4">
+                                    <a href="#report=${p.markdownFile}" class="text-sm font-mono text-lime flex items-center gap-1 hover:underline"><i data-lucide="book-open" class="w-4 h-4"></i> Read Details</a>
+                                    <a href="${p.github}" target="_blank" class="text-sm font-mono text-white flex items-center gap-1 hover:text-violet">
+                                        <img src="https://cdn.simpleicons.org/github/white" class="w-4 h-4"> Source
+                                    </a>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>`;
+                lucide.createIcons();
+            } else if(type === 'writeups') {
+                content.innerHTML = `
+                    <div class="flex items-center gap-3 mb-10"><i data-lucide="book-open" class="text-lime w-8 h-8 drop-shadow-[0_0_5px_#C6FF33]"></i><h2 class="text-3xl font-bold text-white">Research & Writeups</h2></div>
+                    <div class="space-y-6">
+                        ${configData.writeups.map(w => `
+                            <a href="#report=${w.markdownFile}" class="block w-full text-left glass-card p-6 rounded-xl border border-charcoal hover:border-lime transition-all shadow-lg group">
+                                <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-2 mb-3">
+                                    <h3 class="text-xl font-bold text-white group-hover:text-lime group-hover:drop-shadow-[0_0_5px_#C6FF33] transition-all">${w.title}</h3>
+                                    <span class="text-xs font-mono text-violet whitespace-nowrap">${w.date}</span>
+                                </div>
+                                <span class="text-[10px] font-bold text-bluegray uppercase tracking-widest mb-3 block">${w.platform}</span>
+                                <p class="text-lightgray text-sm leading-relaxed mb-4">${w.summary}</p>
+                                <span class="text-lime text-xs font-mono flex items-center gap-1">cat report.md <i data-lucide="corner-down-right" class="w-3 h-3"></i></span>
+                            </a>
+                        `).join('')}
+                    </div>`;
+                lucide.createIcons();
+            }
+        }
+
+        function closeIsolatedViews() {
+            document.getElementById('isolated-container').classList.remove('active');
+            document.getElementById('main-scroll-view').style.display = 'block';
+        }
+
+        async function loadMarkdown(filePath) {
+            const reader = document.getElementById('markdown-reader');
+            const content = document.getElementById('markdown-content');
+            content.innerHTML = `<div class="text-center text-lime animate-pulse font-mono">Fetching data...</div>`;
+            reader.classList.add('active');
+            try {
+                const response = await fetch(filePath);
+                if (!response.ok) throw new Error();
+                content.innerHTML = marked.parse(await response.text());
+            } catch (error) {
+                content.innerHTML = `<h2 class="text-red-500">Error</h2><p>Could not fetch <code>${filePath}</code>. Ensure the file exists.</p>`;
+            }
+        }
+
+        function closeReader() {
+            document.getElementById('markdown-reader').classList.remove('active');
+        }
+
+        // ==========================================
+        // SCROLL OBSERVERS & UI EVENTS
+        // ==========================================
+        function setupScrollObservers() {
+            const sections = document.querySelectorAll('main section');
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-btn');
+            
+            const observer = new IntersectionObserver((entries) => {
+                let current = '';
+                entries.forEach(entry => { if (entry.isIntersecting) current = entry.target.getAttribute('id'); });
+                if(!current) return;
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('text-lime');
+                    link.classList.add('text-bluegray');
+                    if(link.getAttribute('href') === `#${current}` || link.dataset.target === current) {
+                        link.classList.remove('text-bluegray');
+                        link.classList.add('text-lime');
+                    }
+                });
+
+                if(current === 'about' && !window.termExecuted) {
+                    window.termExecuted = true; runRealisticTerminal();
+                }
+            }, { threshold: 0.3, rootMargin: "-10% 0px -50% 0px" });
+
+            sections.forEach(sec => observer.observe(sec));
+            
+            let lastScrollY = window.scrollY;
+            window.addEventListener('scroll', () => {
+                const nav = document.getElementById('mobile-bottom-nav');
+                if (window.scrollY > lastScrollY && window.scrollY > 50) nav.style.transform = 'translateY(150%)';
+                else nav.style.transform = 'translateY(0)';
+                
+                const fab = document.getElementById('scrollTopBtn');
+                if (window.scrollY > 300) fab.classList.remove('hidden-fab');
+                else fab.classList.add('hidden-fab');
+
+                lastScrollY = window.scrollY;
+            });
+        }
+
+        // --- Terminal Typing ---
+        let twIdx = 0, tcIdx = 0, isDel = false;
+        function typeWriter() {
+            if(!configData) return;
+            const word = configData.heroTypingWords[twIdx];
+            const el = document.getElementById('typewriter-text');
+            if(isDel) tcIdx--; else tcIdx++;
+            el.textContent = word.substring(0, tcIdx);
+            
+            let speed = 100 - Math.random() * 50;
+            if(isDel) speed /= 2;
+            if(!isDel && tcIdx === word.length) { speed = 2000; isDel = true; }
+            else if(isDel && tcIdx === 0) { isDel = false; twIdx = (twIdx + 1) % configData.heroTypingWords.length; speed = 500; }
+            setTimeout(typeWriter, speed);
+        }
+
+        async function runRealisticTerminal() {
+            const term = document.getElementById('about-terminal-container');
+            term.innerHTML = '';
+            const sleep = ms => new Promise(r => setTimeout(r, ms));
+            for (let obj of configData.about.terminalCmds) {
+                const line = document.createElement('div'); line.className = "mb-4";
+                const cmd = document.createElement('div'); cmd.className = "text-lime drop-shadow-[0_0_2px_#C6FF33]";
+                cmd.innerHTML = `<span class="text-violet">~</span>$ `;
+                line.appendChild(cmd); term.appendChild(line);
+                
+                const span = document.createElement('span'); cmd.appendChild(span);
+                const cursor = document.createElement('span'); cursor.className = "term-cursor"; cmd.appendChild(cursor);
+                
+                for (let char of obj.cmd) { span.textContent += char; await sleep(50 + Math.random() * 100); }
+                await sleep(400); cursor.remove();
+                
+                const out = document.createElement('div'); out.className = "text-lightgray opacity-90 mt-1 whitespace-pre-line";
+                out.textContent = obj.output; line.appendChild(out);
+                await sleep(800);
+            }
+            const final = document.createElement('div'); final.innerHTML = `<span class="text-lime"><span class="text-violet">~</span>$ <span class="term-cursor"></span></span>`;
+            term.appendChild(final);
+        }
+
+        function getFallbackConfig() {
+            return {
+                heroTypingWords: ["Ethical Hacker"],
+                about: { paragraphs: [], terminalCmds: [{cmd:"whoami", output:"Raqin Al-Asraar"}] },
+                experience: [], certifications: [], projects: [], skills: [], writeups: [], contactLinks: []
+            };
+        }
+    </script>
+</body>
+</html>
+
+
+
