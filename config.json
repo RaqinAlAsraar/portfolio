@@ -155,7 +155,7 @@
                 { "name": "SQL", "icon": "https://cdn.simpleicons.org/mysql" },
                 { "name": "PHP", "icon": "https://cdn.simpleicons.org/php" },
                 { "name": "Java", "icon": "https://img.icons8.com/?size=100&id=13679&format=png&color=000000" },
-                { "name": "Kotin", "icon": "https://cdn.simpleicons.org/kotlin" }
+                { "name": "Kotlin", "icon": "https://cdn.simpleicons.org/kotlin" }
             ]
         }
     ],
