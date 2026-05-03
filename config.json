@@ -56,10 +56,10 @@
             "name": "Kali Linux",
             "issuer": "Udemy",
             "date": "2026",
-            "status": "Going On",
-            "statusColor": "violet", 
+            "status": "Certified",
+            "statusColor": "lime", 
             "icon": "https://www.kali.org/images/favicon-dark.png",
-            "documentLink": "#certifications"
+            "documentLink": "assets/UC-84f5c73c-3073-416c-b43d-1d3c24601ecc.pdf"
         },
         {
             "name": "SQL Programming",
