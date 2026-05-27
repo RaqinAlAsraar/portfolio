@@ -38,10 +38,10 @@
             "name": "Python For Cybersecurity",
             "issuer": "Infosec",
             "date": "2026",
-            "status": "Going On",
-            "statusColor": "violet", 
+            "status": "Certified",
+            "statusColor": "lime", 
             "icon": "https://cdn.simpleicons.org/python",
-            "documentLink": "#certifications"
+            "documentLink": "assets/python-for-cybersecurity.pdf"
         },
         {
             "name": "C Programming with Linux",
