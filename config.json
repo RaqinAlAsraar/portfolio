@@ -163,7 +163,7 @@
         {
              "title": "How I Hacked a Website to Get Unlimited Credits",
              "date": "2026-08-09",
-             "platform": "My Portfolio",
+             "platform": "My Blog",
              "summary": "A walkthrough of how I discovered a race condition that allowed me to manipulate credit balances – my first writeup.",
              "markdownFile": "writeups/How-I-Hacked-A-Website-To-Get-Unlimited-Credits.md"
         }
