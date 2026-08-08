@@ -94,9 +94,9 @@ So don't stop. Keep moving. Your potential shouldn't be measured by money, but b
 
 ## Screenshots
 
-> ![Screenshot here](/images/)
+> ![Screenshot here](https://raw.githubusercontent.com/RaqinAlAsraar/portfolio/refs/heads/main/images/IMG_20260809_041247.jpg)
 
 ---
 
-**— Raqin Al-Asraar**  
+**— Rαqιη Αλ-Αѕʀααʀ**  
 *Cybersecurity Researcher*
