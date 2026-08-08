@@ -1,6 +1,3 @@
-# How I Hacked A Website To Get Unlimited Credits
----
-
 **In the name of Allah, the most Gracious, the most Merciful.**
 
 > *This is my first write-up, so I apologize if you find it boring.*
@@ -97,7 +94,7 @@ So don't stop. Keep moving. Your potential shouldn't be measured by money, but b
 
 ## Screenshots
 
-> *[Insert reward screenshot here]*
+> ![Screenshot here](/images/)
 
 ---
 
