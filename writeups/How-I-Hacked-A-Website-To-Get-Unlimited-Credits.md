@@ -20,7 +20,7 @@ I began by surfing the website as a normal user would. I noted down every compon
 
 ## Day 2 — Mapping the Attack Surface
 
-After completing my initial reconnaissance, I listed down the vulnerabilities I'm proficient in. I tried them all... but **nothing worked** :(
+After completing my initial recon, I listed down the vulnerabilities I'm proficient in. I tried them all... but **nothing worked** :(
 
 Self-doubt began creeping in, but this was exactly what I wanted to fight against. So, I revisited the component and technology list I had prepared for the target. I used Claude to understand every possible bug class that could apply to the tech stack. By the end of the day, I had a long syllabus of new techniques to learn and practice.
 
