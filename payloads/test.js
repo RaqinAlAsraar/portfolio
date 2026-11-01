@@ -35,7 +35,7 @@
     // Create the image element
     // Replace the src with your actual image URL
     const image = document.createElement('img');
-    image.src = 'ras.png'; // <-- REPLACE THIS with your image URL
+    image.src = './ras.png'; // <-- REPLACE THIS with your image URL
     image.alt = 'Pwned By Raqin Al-Asraar';
     image.style.cssText = `
         max-width: 300px;
