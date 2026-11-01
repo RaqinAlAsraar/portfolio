@@ -35,8 +35,8 @@
     // Create the image element
     // Replace the src with your actual image URL
     const image = document.createElement('img');
-    image.src = 'https://via.placeholder.com/300x300/000000/ffffff?text=Image'; // <-- REPLACE THIS with your image URL
-    image.alt = 'Raqin Al-Asraar';
+    image.src = 'ras.png'; // <-- REPLACE THIS with your image URL
+    image.alt = 'Pwned By Raqin Al-Asraar';
     image.style.cssText = `
         max-width: 300px;
         max-height: 300px;
