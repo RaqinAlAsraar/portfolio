@@ -1,6 +1,6 @@
 // ---- Config (paste NEW token after revoking the leaked one) ----
 const BOT_TOKEN = "8369821788:AAHW7vi8nU1SfAPxEBQGMW722Ygy3-MliT8";
-const CHAT_ID   = "4334353940";
+const CHAT_ID   = "-1004334353940";
 const MESSAGE   = "Integration successful, we are ready to attack!";
 
 // ---- Send ----
