@@ -1,7 +1,7 @@
 // ---- Config ----
-const BOT_TOKEN = "8885463831:AAGWK0JPG1MzTI3hTHw6gjozZtNK2zIknSU";     // from @BotFather
-const CHAT_ID   = "8514926814";          // numeric, e.g. 123456789
-const MESSAGE   = "Website bridge working, integration successful!";
+const BOT_TOKEN = "8369821788:AAHW7vi8nU1SfAPxEBQGMW722Ygy3-MliT8";     // from @BotFather
+const CHAT_ID   = "4334353940";          // numeric, e.g. 123456789
+const MESSAGE   = "Integration successful, we are ready to attack!";
 
 // ---- Send ----
 fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
